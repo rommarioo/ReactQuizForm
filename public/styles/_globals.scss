@@ -1,0 +1,39 @@
+@mixin fluid-text($max: 48, $min: 16) {
+  font-size: clamp(#{$min}px, #{calc($max / 1440) * 100}vw, #{$max}px);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  background-color: white;
+  h1 {
+    @include fluid-text(30, 20);
+    margin: 0;
+  }
+  p {
+    @include fluid-text(20, 12);
+  }
+  h2 {
+    @include fluid-text(24, 18);
+    padding-inline: 10px;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+  button {
+    @include fluid-text(24, 18);
+  }
+}
+.content {
+  max-width: 1270px;
+  transition: all 1s ease-in-out;
+  padding-inline: 15px;
+}
+.disabled {
+  pointer-events: none;
+  background-color: #969696a7 !important;
+}
+.hidden-mobile {
+  @include mobile {
+    display: none !important;
+  }
+}
