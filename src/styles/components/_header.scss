@@ -1,6 +1,7 @@
 .header {
   display: flex;
   justify-content: center;
+  margin-bottom: 30px;
 
   &__content {
     max-width: 1020px;
@@ -26,7 +27,7 @@
     margin-bottom: 0;
     text-decoration: none;
     color: inherit;
-    &:hover {
+    @include hover {
       color: #5d97c7;
       scale: 1.1;
       transition: all 0.5s;
