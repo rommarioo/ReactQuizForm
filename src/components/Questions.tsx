@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/hook/redux";
+import { setStep } from "../store/questionSlice";
 
 type Questions = {
   question: string;
@@ -15,8 +17,13 @@ const Questions: React.FC<IPropsQuestions> = ({ questions, nextStep }) => {
   const [result, setResult] = useState("");
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(true);
+  const state = useAppSelector((state) => state.question);
+  const dispatch = useAppDispatch();
+
   const handleNext = () => {
+    dispatch(setStep(result));
     navigate(`/${nextStep}`);
+    console.log(state);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
