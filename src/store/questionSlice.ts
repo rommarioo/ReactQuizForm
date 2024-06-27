@@ -32,20 +32,13 @@ const questionSlice = createSlice({
     setStep4: (state, action: PayloadAction<string>) => {
       state.step4 = action.payload;
     },
-    setPersonalData: (state, action: PayloadAction<string>) => {},
     setAnswer: (state, action: PayloadAction<string>) => {
       state.currentAnswer = action.payload;
     },
   },
 });
 
-export const {
-  setStep1,
-  setStep2,
-  setStep3,
-  setStep4,
-  setPersonalData,
-  setAnswer,
-} = questionSlice.actions;
+export const { setStep1, setStep2, setStep3, setStep4, setAnswer } =
+  questionSlice.actions;
 
 export default questionSlice.reducer;

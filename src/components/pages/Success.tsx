@@ -1,38 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import Header from "../Header";
+import Table from "../Table";
 
 const Success = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="success">
       <div className="success__wrapper">
-        <a href="/">
-          <h1 className="success__title">Success</h1>
-        </a>
+        <Header />
 
-        <p>Your choice)</p>
-        <table className="success__table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {/* {massive.map((item) => (
-              <tr key={item[0]}>
-                <td>{item[0]}</td>
-                <td>{item[1]}</td>
-              </tr>
-            ))} */}
-          </tbody>
-          <tfoot></tfoot>
-        </table>
-
-        <button className="success__button" onClick={() => navigate("/")}>
-          To start
-        </button>
+        <Table />
       </div>
     </div>
   );

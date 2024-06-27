@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Dialog from "./Dialog";
+import { useAppDispatch } from "../store/hook/redux";
+import { setPersonalData } from "../store/personSlice";
 
 interface IPersonData {
-  Name: string;
-  Phone: string;
-  Email: string;
+  name: string;
+  phone: string;
+  email: string;
   agreement: boolean;
 }
 interface IPropsFinalyForm {
@@ -15,6 +17,7 @@ interface IPropsFinalyForm {
 
 const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -27,7 +30,8 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
   const navigate = useNavigate();
 
   const onSubmit = async (personData: IPersonData) => {
-    console.log(personData);
+    const { name, phone, email } = personData;
+    dispatch(setPersonalData({ name, phone, email }));
     reset();
     navigate(`/${nextStep}`);
   };
@@ -49,7 +53,7 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
               <input
                 id="Name"
                 type="text"
-                {...register("Name", {
+                {...register("name", {
                   required: "This field is required",
                   minLength: {
                     value: 2,
@@ -68,8 +72,8 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
                 placeholder="Ivan Ivanov"
               />
             </label>
-            {errors.Name && (
-              <span className="error">{errors?.Name?.message || "Error"}</span>
+            {errors.name && (
+              <span className="error">{errors?.name?.message || "Error"}</span>
             )}
             <label htmlFor="Phone">
               Phone*
@@ -77,7 +81,7 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
                 id="Phone"
                 type="text"
                 onInput={handlePhoneInput}
-                {...register("Phone", {
+                {...register("phone", {
                   required: "This field is required",
                   minLength: {
                     value: 10,
@@ -92,8 +96,8 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
                 maxLength={18}
               />
             </label>
-            {errors.Phone && (
-              <span className="error">{errors?.Phone?.message || "Error"}</span>
+            {errors.phone && (
+              <span className="error">{errors?.phone?.message || "Error"}</span>
             )}
             <label htmlFor="Email">
               E-mail*
@@ -101,7 +105,7 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
                 id="Email"
                 type="text"
                 placeholder="example@example.com"
-                {...register("Email", {
+                {...register("email", {
                   required: "This field is required",
 
                   pattern: {
@@ -111,8 +115,8 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
                 })}
               />
             </label>
-            {errors.Email && (
-              <span className="error">{errors?.Email?.message || "Error"}</span>
+            {errors.email && (
+              <span className="error">{errors?.email?.message || "Error"}</span>
             )}
             <label htmlFor="agreement" className="agreement">
               <input
