@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../store/hook/redux";
 
 const Table = () => {
@@ -5,6 +6,7 @@ const Table = () => {
   const person = useAppSelector((state) => state.person);
   const massive = [...Object.entries(steps), ...Object.entries(person)];
   delete massive[4];
+  const navigate = useNavigate();
   return (
     <>
       <table className="success__table">
