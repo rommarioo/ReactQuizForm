@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hook/redux";
-import { setStep } from "../store/questionSlice";
+import { setAnswer } from "../store/questionSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Questions = {
   question: string;
@@ -10,24 +10,17 @@ type Questions = {
 
 interface IPropsQuestions {
   questions: Questions;
-  nextStep: string;
+  handleNext: () => void;
 }
 
-const Questions: React.FC<IPropsQuestions> = ({ questions, nextStep }) => {
-  const [result, setResult] = useState("");
-  const navigate = useNavigate();
-  const [disabled, setDisabled] = useState(true);
-  const state = useAppSelector((state) => state.question);
+const Questions: React.FC<IPropsQuestions> = ({ questions, handleNext }) => {
   const dispatch = useAppDispatch();
-
-  const handleNext = () => {
-    dispatch(setStep(result));
-    navigate(`/${nextStep}`);
-    console.log(state);
-  };
-
+  const [disabled, setDisabled] = useState(true);
+  const { currentAnswer } = useAppSelector((state) => state.question);
+  const navigateBack = useNavigate();
+  const location = useLocation();
   const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
-    setResult(e.currentTarget.textContent!);
+    dispatch(setAnswer(e.currentTarget.textContent!));
     setDisabled(false);
   };
   return (
@@ -39,7 +32,7 @@ const Questions: React.FC<IPropsQuestions> = ({ questions, nextStep }) => {
             {questions.choise.map((item) => (
               <li
                 onClick={handleClick}
-                className={`steps__item ${result === item && "active"}`}
+                className={`steps__item ${currentAnswer === item && "active"}`}
                 key={item}
               >
                 {item}
@@ -47,14 +40,25 @@ const Questions: React.FC<IPropsQuestions> = ({ questions, nextStep }) => {
             ))}
           </ul>
         </div>
+        <div className="steps__button-countainer">
+          <button
+            className={`steps__button ${disabled && "disabled"}`}
+            onClick={handleNext}
+            disabled={disabled}
+          >
+            Next
+          </button>
 
-        <button
-          className={`steps__button ${disabled && "disabled"}`}
-          onClick={handleNext}
-          disabled={disabled}
-        >
-          Next
-        </button>
+          <button
+            className={`steps__button ${
+              location.pathname === "/" ? "disabled" : ""
+            }`}
+            onClick={() => navigateBack(-1)}
+            disabled={location.pathname === "/" ? true : false}
+          >
+            Back
+          </button>
+        </div>
       </div>
     </div>
   );

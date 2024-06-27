@@ -1,29 +1,51 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface QuestionState {
-  quiz: string[];
+export interface QuestionState {
+  step1: string;
+  step2: string;
+  step3: string;
+  step4: string;
+  currentAnswer: string;
 }
 
 const initialState: QuestionState = {
-  quiz: [],
+  step1: "",
+  step2: "",
+  step3: "",
+  step4: "",
+  currentAnswer: "",
 };
 
 const questionSlice = createSlice({
   name: "question",
   initialState,
-  selectors: {
-    selectAllQuestions: (state) => state,
-  },
   reducers: {
-    setStep: (state, action: PayloadAction<string>) => {
-      if (state.quiz.length >= 4) return;
-      state.quiz.push(action.payload);
-      console.log(action);
+    setStep1: (state, action: PayloadAction<string>) => {
+      state.step1 = action.payload;
+    },
+    setStep2: (state, action: PayloadAction<string>) => {
+      state.step2 = action.payload;
+    },
+    setStep3: (state, action: PayloadAction<string>) => {
+      state.step3 = action.payload;
+    },
+    setStep4: (state, action: PayloadAction<string>) => {
+      state.step4 = action.payload;
     },
     setPersonalData: (state, action: PayloadAction<string>) => {},
+    setAnswer: (state, action: PayloadAction<string>) => {
+      state.currentAnswer = action.payload;
+    },
   },
 });
 
-export const { setStep, setPersonalData } = questionSlice.actions;
-export const { selectAllQuestions } = questionSlice.selectors;
+export const {
+  setStep1,
+  setStep2,
+  setStep3,
+  setStep4,
+  setPersonalData,
+  setAnswer,
+} = questionSlice.actions;
+
 export default questionSlice.reducer;

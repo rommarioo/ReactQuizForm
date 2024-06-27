@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Success = () => {
   const navigate = useNavigate();
@@ -6,7 +6,10 @@ const Success = () => {
   return (
     <div className="success">
       <div className="success__wrapper">
-        <h1 className="success__title">Success</h1>
+        <a href="/">
+          <h1 className="success__title">Success</h1>
+        </a>
+
         <p>Your choice)</p>
         <table className="success__table">
           <thead>

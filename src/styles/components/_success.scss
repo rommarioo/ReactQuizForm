@@ -6,6 +6,7 @@
 
   padding: 10px;
   &__title {
+    border-bottom: 2px solid black;
     @include hover {
       color: #5d97c7;
       scale: 1.1;
@@ -54,6 +55,16 @@
     }
     th {
       border: 1px solid black;
+    }
+  }
+  a {
+    margin-bottom: 0;
+    text-decoration: none;
+    color: inherit;
+    @include hover {
+      color: #5d97c7;
+      scale: 1.1;
+      transition: all 0.5s;
     }
   }
 }

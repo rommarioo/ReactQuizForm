@@ -27,6 +27,7 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
   const navigate = useNavigate();
 
   const onSubmit = async (personData: IPersonData) => {
+    console.log(personData);
     reset();
     navigate(`/${nextStep}`);
   };
@@ -137,15 +138,23 @@ const FinalyForm: React.FC<IPropsFinalyForm> = ({ nextStep }) => {
             )}
           </div>
         </form>
+        <div className="finaly__form-countainer-button">
+          <button
+            className={`finaly__form-button ${!isValid && "disabled"}`}
+            type="submit"
+            onClick={handleSubmit(onSubmit)}
+            disabled={!isValid}
+          >
+            Submit
+          </button>
+          <button
+            className={`finaly__form-button`}
+            onClick={() => navigate(-1)}
+          >
+            Back
+          </button>
+        </div>
 
-        <button
-          className={`finaly__form-button ${!isValid && "disabled"}`}
-          type="submit"
-          onClick={handleSubmit(onSubmit)}
-          disabled={!isValid}
-        >
-          Submit
-        </button>
         {isOpenDialog && <Dialog setIsOpenDialog={setIsOpenDialog} />}
       </div>
     </div>
