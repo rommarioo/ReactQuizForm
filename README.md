@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# React + Redux-toolkit + TypeScript + Vite
 
 Template React Quiz Form
 
