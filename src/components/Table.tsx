@@ -29,7 +29,7 @@ const Table = () => {
       </table>
 
       <button className="success__button" onClick={() => navigate("/")}>
-        To start
+        TO START
       </button>
     </>
   );
