@@ -12,7 +12,7 @@ interface IPropsQuestions {
   questions: Questions;
   handleNext: () => void;
 }
-
+//test
 const Questions: React.FC<IPropsQuestions> = ({ questions, handleNext }) => {
   const dispatch = useAppDispatch();
   const [disabled, setDisabled] = useState(true);
